@@ -1,5 +1,5 @@
 import React from 'react';
-import { Counter, Todos, Weather } from '../../features';
+import { Counter, Todos, Weather } from '~/features';
 
 export function App() {
   return (

@@ -1,11 +1,17 @@
-export function TodoItem({ todo }) {
+export function TodoItem({ todo, onDelete, onComplete }) {
   return (
     <li>
       <label>
-        <input type="checkbox" defaultChecked={todo.completed} />
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={(e) => onComplete(todo)}
+        />
         {todo.title}
       </label>
-      <button type="button">&times;</button>
+      <button type="button" onClick={() => onDelete(todo)}>
+        &times;
+      </button>
     </li>
   );
 }

@@ -1,0 +1,32 @@
+.todoList {
+  list-style: none;
+  padding: 0 1rem;
+}
+
+.todoList label:has(input:checked) {
+  text-decoration: line-through;
+}
+
+.todoList button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 2px 0 0 0;
+
+  background-color: rgb(242, 111, 111);
+  border-radius: 50%;
+  border: 1px solid #c00;
+  color: rgb(99, 16, 16);
+}
+
+.todoList button:active {
+  background-color: rgb(196, 75, 75);
+}
+
+.todoList li {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}

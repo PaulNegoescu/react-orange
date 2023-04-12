@@ -5,8 +5,8 @@ export function App() {
   return (
     <>
       <Todos />
-      <Weather />
-      <Counter initialCount={3} initialStep={2} />
+      {/* <Weather />
+      <Counter initialCount={3} initialStep={2} /> */}
     </>
   );
 }

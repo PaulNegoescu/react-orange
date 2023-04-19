@@ -27,3 +27,27 @@
 .filmList img {
   max-width: 100%;
 }
+
+.addForm {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.addForm :is(label, span) {
+  text-align: right;
+}
+
+.submitBtn {
+  grid-column-start: 2;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.group label {
+  text-align: left;
+}

@@ -4,6 +4,7 @@ import { configureApi } from '~/helpers/apiHelper';
 import { FilmItem } from './FilmItem';
 
 import styles from './Films.module.css';
+import { Link } from 'react-router-dom';
 
 const { retrieve } = configureApi('films');
 
@@ -17,6 +18,9 @@ export function FilmList() {
   return (
     <>
       <h1>Film List</h1>
+      <Link to="add" className="btn">
+        Add a new film
+      </Link>
       {!films && <Loading />}
       {films && (
         <ul className={styles.filmList}>

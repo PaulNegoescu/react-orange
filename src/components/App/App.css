@@ -22,3 +22,45 @@ html {
 body {
   margin: 0;
 }
+
+.btn {
+  --bg-color: var(--primary-color);
+  --border-color: var(--primary-color);
+  --text: var(--text-color-light);
+
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: fit-content;
+
+  padding: 0.5rem 1rem;
+  margin: 0;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:is(:hover, :active) {
+  --bg-color: var(--primary-color-light);
+  --text: var(--primary-color);
+}
+
+.btn-accent {
+  --bg-color: var(--accent-color);
+  --text: var(--dark-color);
+  --border-color: var(--text);
+}
+
+.btn-accent:is(:hover, :active) {
+  --bg-color: var(--accent-color-darkest);
+}
+
+input:is(:not([type='radio'], [type='checkbox'])) {
+  padding: 0.4rem 0.3rem;
+  border-radius: 3px;
+  border: 1px solid var(--dark-color);
+}

@@ -19,11 +19,15 @@ const headers = {
 };
 
 export function configureApi(endpoint) {
-  function retrieve(search = '', options = {}) {
+  function retrieve(id, search = '', options = {}) {
     if (search) {
       search = `?${search}`;
     }
-    return fetch(`${apiUrl}/${endpoint}${search}`, options).then(
+    let segment = '';
+    if (id) {
+      segment = `/${id}`;
+    }
+    return fetch(`${apiUrl}/${endpoint}${segment}${search}`, options).then(
       handleServerResponse
     );
   }

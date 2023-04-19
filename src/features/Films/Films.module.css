@@ -1,0 +1,29 @@
+.filmList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.filmList li {
+  border: 1px solid var(--dark-color);
+  border-radius: 3px;
+}
+
+.filmList a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.filmList img {
+  max-width: 100%;
+}

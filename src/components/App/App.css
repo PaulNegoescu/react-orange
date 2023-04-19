@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #024959;
+  --primary-color-light: #04b0d7;
+  --accent-color: #f2c12e;
+  --accent-color-dark: #f2ae30;
+  --accent-color-darkest: #ffa600;
+  --dark-color: #593e25;
+  --light-color: #a1a2a6;
+  --text-color: #333;
+  --text-color-light: #edeef2;
+}
+
+html {
+  font-family: sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  margin: 0;
+}

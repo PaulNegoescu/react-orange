@@ -1,0 +1,28 @@
+.mainNav {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1rem 1rem;
+
+  background-color: var(--dark-color);
+}
+
+.mainNav a {
+  --text: var(--accent-color);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.mainNav :is(a:hover, .active) {
+  --text: var(--accent-color-darkest);
+}
+
+.mainNav menu {
+  display: flex;
+  gap: 1rem;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}

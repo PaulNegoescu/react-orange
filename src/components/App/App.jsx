@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import {
   Counter,
   Todos,
@@ -12,6 +13,7 @@ import {
 } from '~/features';
 import { Nav } from '~/components';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 export function App() {
@@ -32,6 +34,7 @@ export function App() {
         <Route path="films/add" element={<AddFilm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ToastContainer />
     </>
   );
 }

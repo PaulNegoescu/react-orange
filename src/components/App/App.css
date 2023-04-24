@@ -59,7 +59,7 @@ body {
   --bg-color: var(--accent-color-darkest);
 }
 
-input:is(:not([type='radio'], [type='checkbox'])) {
+input:where(:not([type='radio'], [type='checkbox'])) {
   padding: 0.4rem 0.3rem;
   border-radius: 3px;
   border: 1px solid var(--dark-color);

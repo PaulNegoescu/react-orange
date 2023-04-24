@@ -51,3 +51,18 @@
 .group label {
   text-align: left;
 }
+
+.fieldError {
+  grid-column-start: 2;
+
+  color: #c00;
+  margin-top: 0;
+}
+
+.invalid {
+  border-color: #c00;
+}
+
+.addForm label:has(+ .invalid) {
+  color: #c00;
+}

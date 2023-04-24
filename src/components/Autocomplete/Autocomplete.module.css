@@ -1,0 +1,9 @@
+.autoComplete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.autoComplete [type='text'] {
+  flex: 100% 1 0;
+}

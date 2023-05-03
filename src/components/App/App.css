@@ -64,3 +64,41 @@ input:where(:not([type='radio'], [type='checkbox'])) {
   border-radius: 3px;
   border: 1px solid var(--dark-color);
 }
+
+.pageForm {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+
+  max-width: 960px;
+  margin: auto;
+}
+
+.pageForm .submitBtn {
+  grid-column-start: 2;
+}
+
+.pageForm label {
+  text-align: right;
+  align-self: center;
+}
+
+.pageForm label.selfTop {
+  align-self: start;
+  margin-top: 0.2rem;
+}
+
+.pageForm label:has(+ .isInvalid) {
+  color: #c00;
+}
+
+.inputError {
+  grid-column-start: 2;
+
+  color: #c00;
+  margin-top: 0;
+}
+
+.isInvalid {
+  border-color: #c00;
+}

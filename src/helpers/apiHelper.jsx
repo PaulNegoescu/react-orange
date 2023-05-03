@@ -39,6 +39,7 @@ export function configureApi(endpoint) {
 
     if (options.accessToken) {
       options.headers = {
+        ...options.headers,
         Authorization: `Bearer ${options.accessToken}`,
       };
 
@@ -51,12 +52,12 @@ export function configureApi(endpoint) {
   }
 
   function create(body, options = {}) {
+    options.headers = {
+      ...headers,
+      ...options.headers,
+    };
     if (options.accessToken) {
-      options.headers = {
-        ...headers,
-        ...options.headers,
-        Authorization: `Bearer ${options.accessToken}`,
-      };
+      options.headers.Authorization = `Bearer ${options.accessToken}`;
 
       delete options.accessToken;
     }
@@ -69,12 +70,12 @@ export function configureApi(endpoint) {
   }
 
   function update(id, body, options = {}) {
+    options.headers = {
+      ...headers,
+      ...options.headers,
+    };
     if (options.accessToken) {
-      options.headers = {
-        ...headers,
-        ...options.headers,
-        Authorization: `Bearer ${options.accessToken}`,
-      };
+      options.headers.Authorization = `Bearer ${options.accessToken}`;
 
       delete options.accessToken;
     }
@@ -87,11 +88,11 @@ export function configureApi(endpoint) {
   }
 
   function remove(id, options = {}) {
+    options.headers = {
+      ...options.headers,
+    };
     if (options.accessToken) {
-      options.headers = {
-        ...options.headers,
-        Authorization: `Bearer ${options.accessToken}`,
-      };
+      options.headers.Authorization = `Bearer ${options.accessToken}`;
 
       delete options.accessToken;
     }

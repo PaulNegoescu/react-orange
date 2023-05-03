@@ -3,6 +3,7 @@ export { Counter } from './Counter/Counter';
 export { Todos } from './Todos/Todos';
 export { NotFound } from './NotFound/NotFound';
 export { AuthForms } from './Auth/AuthForms';
+export { AuthRequired } from './Auth/AuthRequired';
 export {
   AuthContextProvider,
   useAuth,

@@ -8,6 +8,8 @@ import { useAuth } from './Auth.context';
 
 import styles from './Auth.module.css';
 import clsx from 'clsx';
+import { Input } from '~/components';
+import { useEffect } from 'react';
 
 const commonValidators = {
   email: string().required().email(),
@@ -27,7 +29,7 @@ const { create: signup } = configureApi('register');
 const { create: signin } = configureApi('login');
 
 export function AuthForms() {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   let isRegister = true;
   if (pathname !== '/register') {
     isRegister = false;
@@ -44,6 +46,12 @@ export function AuthForms() {
   const { login, user } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   async function handleAuth(data) {
     const { retype_password, ...newUser } = data;
 
@@ -57,7 +65,8 @@ export function AuthForms() {
       // save the user and token somehow
       login(response);
       // redirect the user to someplace else
-      navigate('/');
+      const destination = state.from ? state.from : '/';
+      navigate(destination);
     } catch (e) {
       // if (e instanceof ApiError) {
       // }
@@ -68,67 +77,43 @@ export function AuthForms() {
   return (
     <>
       <h1>{isRegister ? 'Register' : 'Login'}</h1>
-      <form className={styles.form} onSubmit={handleSubmit(handleAuth)}>
-        <label htmlFor="email">Email</label>
-        <input
+      <form className="pageForm" onSubmit={handleSubmit(handleAuth)}>
+        <Input
           type="email"
-          id="email"
+          label="Email"
+          errors={errors}
+          placeholder="Email Address"
           {...register('email')}
-          className={clsx({ [styles.invalid]: errors.email })}
         />
-        {errors?.email && (
-          <p className={styles.fieldError}>{errors.email.message}</p>
-        )}
-        <label htmlFor="password">Password</label>
-        <input
+        <Input
           type="password"
-          id="password"
+          label="Password"
+          errors={errors}
           {...register('password')}
-          className={clsx({ [styles.invalid]: errors.password })}
         />
-        {errors?.password && (
-          <p className={styles.fieldError}>{errors.password.message}</p>
-        )}
         {isRegister && (
           <>
-            <label htmlFor="retype_password">Retype Password</label>
-            <input
+            <Input
               type="password"
-              id="retype_password"
+              label="Retype Password"
+              errors={errors}
               {...register('retype_password')}
-              className={clsx({ [styles.invalid]: errors.retype_password })}
             />
-            {errors?.retype_password && (
-              <p className={styles.fieldError}>
-                {errors.retype_password.message}
-              </p>
-            )}
-
-            <label htmlFor="firstName">First Name</label>
-            <input
+            <Input
               type="text"
-              id="firstName"
+              label="First Name"
+              errors={errors}
               {...register('firstName')}
-              className={clsx({ [styles.invalid]: errors.firstName })}
             />
-            {errors?.firstName && (
-              <p className={styles.fieldError}>{errors.firstName.message}</p>
-            )}
-
-            <label htmlFor="lastName">Last Name</label>
-            <input
+            <Input
               type="text"
-              id="lastName"
+              label="Last Name"
+              errors={errors}
               {...register('lastName')}
-              className={clsx({ [styles.invalid]: errors.lastName })}
             />
-            {errors?.lastName && (
-              <p className={styles.fieldError}>{errors.lastName.message}</p>
-            )}
           </>
         )}
-        ;
-        <button type="submit" className="btn">
+        <button type="submit" className="btn submitBtn">
           {isRegister ? 'Register' : 'Login'}
         </button>
       </form>

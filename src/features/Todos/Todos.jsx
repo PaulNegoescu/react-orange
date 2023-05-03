@@ -3,21 +3,29 @@ import styles from './Todos.module.css';
 import { TodoItem } from './TodoItem';
 import { replaceItemInArray } from '~/helpers/arrayHelpers';
 import { configureApi } from '~/helpers/apiHelper';
+import { useLocalStorageState } from '~/hooks';
+import { useAuth } from '..';
 
 const { retrieve, create, remove, update } = configureApi('todos');
 
 export function Todos() {
   const [todos, setTodos] = useState(null);
   const titleRef = useRef();
+  const { accessToken, user } = useAuth();
 
   useEffect(() => {
-    retrieve().then((data) => setTodos(data));
-  }, []);
+    retrieve('', `userId=${user.id}`, { accessToken }).then((data) =>
+      setTodos(data)
+    );
+  }, [setTodos, accessToken, user]);
 
   async function handleAddTodo(e) {
     e.preventDefault();
     const form = new FormData(e.target);
-    const todo = await create({ title: form.get('title'), completed: false });
+    const todo = await create(
+      { title: form.get('title'), completed: false, userId: user.id },
+      { accessToken }
+    );
 
     setTodos([...todos, todo]);
     e.target.reset();
@@ -33,7 +41,7 @@ export function Todos() {
       return false;
     }
 
-    await remove(todo.id);
+    await remove(todo.id, { accessToken });
     setTodos(todos.filter((t) => t !== todo));
   }
 
@@ -46,7 +54,7 @@ export function Todos() {
     setTodos(newTodos);
 
     try {
-      await update(todo.id, { completed: !todo.completed });
+      await update(todo.id, { completed: !todo.completed }, { accessToken });
     } catch (e) {
       console.warn(e);
       setTodos(origTodos);

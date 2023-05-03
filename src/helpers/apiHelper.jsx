@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export class ApiError extends Error {
@@ -7,9 +9,15 @@ export class ApiError extends Error {
   }
 }
 
-function handleServerResponse(res) {
+async function handleServerResponse(res) {
   if (!res.ok) {
-    throw new ApiError(res.status);
+    let message = 'Something went wrong, please try again later';
+    if (res.status >= 400 && res.status < 500) {
+      message = await res.json();
+    }
+
+    toast.error(message);
+    throw new ApiError(res.status, message);
   }
   return res.json();
 }
@@ -23,40 +31,71 @@ export function configureApi(endpoint) {
     if (search) {
       search = `?${search}`;
     }
+
     let segment = '';
     if (id) {
       segment = `/${id}`;
     }
+
+    if (options.accessToken) {
+      options.headers = {
+        Authorization: `Bearer ${options.accessToken}`,
+      };
+
+      delete options.accessToken;
+    }
+
     return fetch(`${apiUrl}/${endpoint}${segment}${search}`, options).then(
       handleServerResponse
     );
   }
 
   function create(body, options = {}) {
+    if (options.accessToken) {
+      options.headers = {
+        ...headers,
+        ...options.headers,
+        Authorization: `Bearer ${options.accessToken}`,
+      };
+
+      delete options.accessToken;
+    }
+
     return fetch(`${apiUrl}/${endpoint}`, {
       ...options,
       method: 'POST',
       body: JSON.stringify(body),
-      headers: {
-        ...headers,
-        ...options.headers,
-      },
     }).then(handleServerResponse);
   }
 
   function update(id, body, options = {}) {
+    if (options.accessToken) {
+      options.headers = {
+        ...headers,
+        ...options.headers,
+        Authorization: `Bearer ${options.accessToken}`,
+      };
+
+      delete options.accessToken;
+    }
+
     return fetch(`${apiUrl}/${endpoint}/${id}`, {
       ...options,
       method: 'PATCH',
       body: JSON.stringify(body),
-      headers: {
-        ...headers,
-        ...options.headers,
-      },
     }).then(handleServerResponse);
   }
 
   function remove(id, options = {}) {
+    if (options.accessToken) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${options.accessToken}`,
+      };
+
+      delete options.accessToken;
+    }
+
     return fetch(`${apiUrl}/${endpoint}/${id}`, {
       ...options,
       method: 'DELETE',

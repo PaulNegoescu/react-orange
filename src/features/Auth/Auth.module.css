@@ -1,0 +1,28 @@
+.form {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+
+  max-width: 960px;
+  margin: auto;
+}
+
+.form button {
+  grid-column-start: 2;
+}
+
+.form label {
+  text-align: right;
+  align-self: center;
+}
+
+.fieldError {
+  grid-column-start: 2;
+
+  color: #c00;
+  margin-top: 0;
+}
+
+.invalid {
+  border-color: #c00;
+}

@@ -10,6 +10,8 @@ import {
   FilmDetails,
   EditFilm,
   AddFilm,
+  AuthForms,
+  AuthContextProvider,
 } from '~/features';
 import { Nav } from '~/components';
 
@@ -19,22 +21,26 @@ import './App.css';
 export function App() {
   return (
     <>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<h1>Homepage</h1>} />
-        <Route path="todos" element={<Todos />} />
-        <Route path="weather" element={<Weather />} />
-        <Route
-          path="counter"
-          element={<Counter initialCount={3} initialStep={2} />}
-        />
-        <Route path="films" element={<FilmList />} />
-        <Route path="films/:filmId" element={<FilmDetails />} />
-        <Route path="films/:filmId/edit" element={<EditFilm />} />
-        <Route path="films/add" element={<AddFilm />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <ToastContainer />
+      <AuthContextProvider>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<h1>Homepage</h1>} />
+          <Route path="todos" element={<Todos />} />
+          <Route path="weather" element={<Weather />} />
+          <Route
+            path="counter"
+            element={<Counter initialCount={3} initialStep={2} />}
+          />
+          <Route path="films" element={<FilmList />} />
+          <Route path="films/:filmId" element={<FilmDetails />} />
+          <Route path="films/:filmId/edit" element={<EditFilm />} />
+          <Route path="films/add" element={<AddFilm />} />
+          <Route path="register" element={<AuthForms />} />
+          <Route path="login" element={<AuthForms />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <ToastContainer />
+      </AuthContextProvider>
     </>
   );
 }

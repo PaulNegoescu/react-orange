@@ -3,7 +3,6 @@ import styles from './Todos.module.css';
 import { TodoItem } from './TodoItem';
 import { replaceItemInArray } from '~/helpers/arrayHelpers';
 import { configureApi } from '~/helpers/apiHelper';
-import { useLocalStorageState } from '~/hooks';
 import { useAuth } from '..';
 
 const { retrieve, create, remove, update } = configureApi('todos');

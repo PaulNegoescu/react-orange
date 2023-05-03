@@ -14,7 +14,6 @@ import {
   AuthContextProvider,
   AuthRequired,
 } from '~/features';
-import { Nav } from '~/components';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';

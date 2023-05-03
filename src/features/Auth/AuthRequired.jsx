@@ -18,7 +18,7 @@ export function AuthRequired({ admin, children }) {
       toast.error('You are not allowed to view that section!');
       navigate('/');
     }
-  }, [user, navigate, pathname]);
+  }, [user, navigate, pathname, admin]);
 
   return (
     <>

@@ -6,8 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { configureApi } from '~/helpers/apiHelper';
 import { useAuth } from './Auth.context';
 
-import styles from './Auth.module.css';
-import clsx from 'clsx';
 import { Input } from '~/components';
 import { useEffect } from 'react';
 
